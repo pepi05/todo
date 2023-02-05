@@ -1,0 +1,59 @@
+.appTitle {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.formContainer {
+  position: relative;
+  width: 50%;
+  display: flex;
+  margin-inline: auto;
+}
+
+.formInput {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid gray;
+  border-radius: 12px;
+}
+
+.formInput:focus {
+  outline: none;
+}
+
+.addButton {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.todoContainer {
+  width: 50%;
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid blue;
+  border-radius: 20px;
+}
+
+.todoCompletedContainer {
+  border: 1px solid green;
+}
+
+.completedTodo {
+  text-decoration: line-through;
+}
+
+.todoName {
+  padding: 12px;
+}
+
+.todoIconsContainer {
+  display: flex;
+}
+
+.icon {
+  cursor: pointer;
+  margin-right: 10px;
+}
