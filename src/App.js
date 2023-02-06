@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { AiOutlineDelete, AiOutlineCheck, AiOutlineEdit } from "react-icons/ai";
 import "./app.css";
+import TodoForm from "./components/TodoForm/TodoForm";
+import TodoList from "./components/TodoList.js/TodoList";
 
 const App = () => {
   const [inputValue, setInputValue] = useState("");
@@ -79,65 +80,22 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="appTitle">Petar Todo</h1>
-      <div className="formContainer">
-        <input
-          ref={itemRef}
-          className="formInput"
-          type="text"
-          id="text"
-          onChange={onInputChange}
-          value={inputValue}
-          placeholder="Enter Todo"
-        />
-        {!isEditClicked ? (
-          <button className="addButton" onClick={() => addTodo(inputValue)}>
-            Add
-          </button>
-        ) : (
-          <>
-            <button className="cancelUpdateButton" onClick={cancelUpdate}>
-              Cancel
-            </button>
-            <button className="updateButton" onClick={updateTodo}>
-              Update
-            </button>
-          </>
-        )}
-      </div>
+      <TodoForm
+        itemRef={itemRef}
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+        isEditClicked={isEditClicked}
+        addTodo={addTodo}
+        cancelUpdate={cancelUpdate}
+        updateTodo={updateTodo}
+      />
 
-      {todos.map((todo) => {
-        return (
-          <div
-            key={todo.id}
-            className={`${
-              !todo.active && "todoCompletedContainer"
-            } todoContainer`}
-          >
-            <h2 className={`${!todo.active && "completedTodo"} todoName`}>
-              {todo.name}
-            </h2>
-            <div className="todoIconsContainer">
-              <AiOutlineEdit
-                onClick={() => onEditClick(todo.name, todo.id)}
-                className="icon"
-                size={20}
-              />
-              <AiOutlineCheck
-                onClick={() => completeTodo(todo.id)}
-                className="icon"
-                size={20}
-                color="green"
-              />
-              <AiOutlineDelete
-                onClick={() => deleteTodo(todo.id)}
-                className="icon"
-                size={20}
-                color="red"
-              />
-            </div>
-          </div>
-        );
-      })}
+      <TodoList
+        todos={todos}
+        onEditClick={onEditClick}
+        completeTodo={completeTodo}
+        deleteTodo={deleteTodo}
+      />
     </div>
   );
 };

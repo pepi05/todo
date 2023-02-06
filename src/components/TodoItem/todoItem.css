@@ -1,0 +1,30 @@
+.todoContainer {
+  width: 50%;
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgb(11, 59, 110);
+  border-radius: 20px;
+}
+
+.todoCompletedContainer {
+  border: 1px solid green;
+}
+
+.completedTodo {
+  text-decoration: line-through;
+}
+
+.todoName {
+  padding: 12px;
+}
+
+.todoIconsContainer {
+  display: flex;
+}
+
+.icon {
+  cursor: pointer;
+  margin-right: 10px;
+}
