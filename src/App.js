@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineDelete, AiOutlineCheck, AiOutlineEdit } from "react-icons/ai";
 import "./app.css";
 
 const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
+  const [isEditClicked, setIsEditClicked] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const itemRef = useRef();
 
   const onInputChange = (e) => {
     setInputValue(e.target.value);
@@ -41,11 +44,44 @@ const App = () => {
     setTodos(completedTodo);
   };
 
+  const onEditClick = (todoText, todoId) => {
+    setInputValue(todoText);
+    setIsEditClicked(true);
+    setEditId(todoId);
+  };
+
+  const updateTodo = () => {
+    const updatedTodo = todos.map((todo) => {
+      if (todo.id === editId && inputValue.length > 1) {
+        return {
+          ...todo,
+          name: inputValue,
+        };
+      }
+      return todo;
+    });
+    setTodos(updatedTodo);
+    setInputValue("");
+    setIsEditClicked(false);
+  };
+
+  const cancelUpdate = () => {
+    setIsEditClicked(false);
+    setInputValue("");
+  };
+
+  useEffect(() => {
+    if (isEditClicked) {
+      itemRef.current.focus();
+    }
+  }, [isEditClicked]);
+
   return (
     <div className="App">
       <h1 className="appTitle">Petar Todo</h1>
       <div className="formContainer">
         <input
+          ref={itemRef}
           className="formInput"
           type="text"
           id="text"
@@ -53,9 +89,20 @@ const App = () => {
           value={inputValue}
           placeholder="Enter Todo"
         />
-        <button className="addButton" onClick={() => addTodo(inputValue)}>
-          Add
-        </button>
+        {!isEditClicked ? (
+          <button className="addButton" onClick={() => addTodo(inputValue)}>
+            Add
+          </button>
+        ) : (
+          <>
+            <button className="cancelUpdateButton" onClick={cancelUpdate}>
+              Cancel
+            </button>
+            <button className="updateButton" onClick={updateTodo}>
+              Update
+            </button>
+          </>
+        )}
       </div>
 
       {todos.map((todo) => {
@@ -70,7 +117,11 @@ const App = () => {
               {todo.name}
             </h2>
             <div className="todoIconsContainer">
-              <AiOutlineEdit className="icon" size={20} />
+              <AiOutlineEdit
+                onClick={() => onEditClick(todo.name, todo.id)}
+                className="icon"
+                size={20}
+              />
               <AiOutlineCheck
                 onClick={() => completeTodo(todo.id)}
                 className="icon"

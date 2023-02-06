@@ -22,9 +22,48 @@
 }
 
 .addButton {
+  cursor: pointer;
   position: absolute;
   right: 10px;
   bottom: 10px;
+  color: white;
+  background-color: rgb(11, 59, 110);
+  border: 1px solid rgb(7, 46, 87);
+  border-radius: 4px;
+}
+
+.addButton:hover {
+  background-color: rgb(31, 79, 131);
+}
+
+.cancelUpdateButton {
+  cursor: pointer;
+  position: absolute;
+  right: 80px;
+  bottom: 10px;
+  color: white;
+  background-color: red;
+  border: 1px solid rgba(209, 1, 1, 0.804);
+  border-radius: 4px;
+}
+
+.cancelUpdateButton:hover {
+  background-color: rgb(236, 81, 81);
+}
+
+.updateButton {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: white;
+  background-color: rgb(10, 137, 10);
+  border: 1px solid rgb(2, 77, 2);
+  border-radius: 4px;
+}
+
+.updateButton:hover {
+  background-color: rgb(1, 180, 1);
 }
 
 .todoContainer {
@@ -33,7 +72,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid blue;
+  border: 1px solid rgb(11, 59, 110);
   border-radius: 20px;
 }
 
