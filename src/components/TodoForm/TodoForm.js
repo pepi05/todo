@@ -2,7 +2,7 @@ import React from "react";
 import "./todoForm.css";
 
 const TodoForm = ({
-  itemRef,
+  inputRef,
   onInputChange,
   inputValue,
   addTodo,
@@ -13,7 +13,7 @@ const TodoForm = ({
   return (
     <div className="formContainer">
       <input
-        ref={itemRef}
+        ref={inputRef}
         className="formInput"
         type="text"
         id="text"

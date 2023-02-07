@@ -8,7 +8,8 @@ const App = () => {
   const [todos, setTodos] = useState([]);
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [editId, setEditId] = useState(null);
-  const itemRef = useRef();
+  const [selectedValue, setSelectedValue] = useState("All Todos");
+  const inputRef = useRef();
 
   const onInputChange = (e) => {
     setInputValue(e.target.value);
@@ -71,27 +72,60 @@ const App = () => {
     setInputValue("");
   };
 
+  const onSelectChange = (e) => {
+    setSelectedValue(e.target.value);
+  };
+
+  const filteredTodoList = todos.filter((todo) => {
+    if (selectedValue === "Active") {
+      return todo.active;
+    }
+    if (selectedValue === "Completed") {
+      return !todo.active;
+    }
+    return todo;
+  });
+
   useEffect(() => {
     if (isEditClicked) {
-      itemRef.current.focus();
+      inputRef.current.focus();
     }
   }, [isEditClicked]);
 
   return (
     <div className="App">
       <h1 className="appTitle">Petar Todo</h1>
-      <TodoForm
-        itemRef={itemRef}
-        inputValue={inputValue}
-        onInputChange={onInputChange}
-        isEditClicked={isEditClicked}
-        addTodo={addTodo}
-        cancelUpdate={cancelUpdate}
-        updateTodo={updateTodo}
-      />
+      <div
+        style={{
+          display: "flex",
+          width: "50%",
+          margin: "0 auto",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ width: "60%" }}>
+          <TodoForm
+            inputRef={inputRef}
+            inputValue={inputValue}
+            onInputChange={onInputChange}
+            isEditClicked={isEditClicked}
+            addTodo={addTodo}
+            cancelUpdate={cancelUpdate}
+            updateTodo={updateTodo}
+          />
+        </div>
+
+        <div style={{ width: "30%" }}>
+          <select onChange={onSelectChange} id="todos">
+            <option defaultValue>All Todos</option>
+            <option value="Active">Active</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      </div>
 
       <TodoList
-        todos={todos}
+        todos={filteredTodoList}
         onEditClick={onEditClick}
         completeTodo={completeTodo}
         deleteTodo={deleteTodo}
