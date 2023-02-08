@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./app.css";
 import TodoForm from "./components/TodoForm/TodoForm";
-import TodoList from "./components/TodoList.js/TodoList";
+import TodoList from "./components/TodoList/TodoList";
 
 const App = () => {
   const [inputValue, setInputValue] = useState("");
@@ -107,7 +107,7 @@ const App = () => {
     if (isEditClicked) {
       inputRef.current.focus();
     }
-  }, [isEditClicked]);
+  }, [isEditClicked, editId]);
 
   return (
     <div className="App">
