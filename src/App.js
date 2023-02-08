@@ -9,6 +9,7 @@ const App = () => {
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [editId, setEditId] = useState(null);
   const [selectedValue, setSelectedValue] = useState("All Todos");
+  const [dateSort, setDateSort] = useState("desc");
   const inputRef = useRef();
 
   const onInputChange = (e) => {
@@ -76,15 +77,31 @@ const App = () => {
     setSelectedValue(e.target.value);
   };
 
-  const filteredTodoList = todos.filter((todo) => {
-    if (selectedValue === "Active") {
-      return todo.active;
-    }
-    if (selectedValue === "Completed") {
-      return !todo.active;
-    }
-    return todo;
-  });
+  const filteredTodoList = todos
+    .filter((todo) => {
+      if (selectedValue === "Active") {
+        return todo.active;
+      }
+      if (selectedValue === "Completed") {
+        return !todo.active;
+      }
+      return todo;
+    })
+    .sort((a, b) => {
+      if (dateSort === "A-Z") {
+        return a.name.localeCompare(b.name);
+      } else if (dateSort === "Z-A") {
+        return b.name.localeCompare(a.name);
+      } else if (dateSort === "asc") {
+        return new Date(a.date) - new Date(b.date);
+      } else {
+        return new Date(b.date) - new Date(a.date);
+      }
+    });
+
+  const onDateSort = (e) => {
+    setDateSort(e.target.value);
+  };
 
   useEffect(() => {
     if (isEditClicked) {
@@ -103,7 +120,7 @@ const App = () => {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ width: "60%" }}>
+        <div style={{ width: "50%" }}>
           <TodoForm
             inputRef={inputRef}
             inputValue={inputValue}
@@ -115,11 +132,40 @@ const App = () => {
           />
         </div>
 
-        <div style={{ width: "30%" }}>
-          <select onChange={onSelectChange} id="todos">
+        <div style={{ width: "22%" }}>
+          <select
+            onChange={onSelectChange}
+            id="filterTodos"
+            style={{
+              height: "43px",
+              border: "2px solid gray",
+              borderRadius: "12px",
+              width: "100%",
+              cursor: "pointer",
+            }}
+          >
             <option defaultValue>All Todos</option>
             <option value="Active">Active</option>
             <option value="Completed">Completed</option>
+          </select>
+        </div>
+
+        <div style={{ width: "22%" }}>
+          <select
+            onChange={onDateSort}
+            id="sortTodos"
+            style={{
+              height: "43px",
+              border: "2px solid gray",
+              borderRadius: "12px",
+              width: "100%",
+              cursor: "pointer",
+            }}
+          >
+            <option defaultValue="desc">Latest</option>
+            <option value="asc">Earliest</option>
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
           </select>
         </div>
       </div>
