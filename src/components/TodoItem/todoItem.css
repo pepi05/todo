@@ -28,3 +28,9 @@
   cursor: pointer;
   margin-right: 10px;
 }
+
+@media (max-width: 768px) {
+  .todoContainer {
+    width: 90%;
+  }
+}

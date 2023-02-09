@@ -2,3 +2,35 @@
   text-align: center;
   margin: 60px 0;
 }
+
+.formAndSelectContainer {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.todoFormContainer {
+  width: 50%;
+}
+
+.selectContainer {
+  width: 22%;
+}
+
+@media (max-width: 768px) {
+  .formAndSelectContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    gap: 20px;
+  }
+  .todoFormContainer {
+    grid-column: 1 / 3;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .selectContainer {
+    width: 100%;
+  }
+}

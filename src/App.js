@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./app.css";
+import SelectInput from "./components/SelectInput/SelectInput";
 import TodoForm from "./components/TodoForm/TodoForm";
 import TodoList from "./components/TodoList/TodoList";
 
@@ -11,6 +12,16 @@ const App = () => {
   const [selectedValue, setSelectedValue] = useState("All Todos");
   const [dateSort, setDateSort] = useState("desc");
   const inputRef = useRef();
+
+  const filterOptions = [
+    { value: "Active", name: "Active" },
+    { value: "Completed", name: "Completed" },
+  ];
+  const sortOptions = [
+    { value: "asc", name: "Earliest" },
+    { value: "A-Z", name: "A-Z" },
+    { value: "Z-A", name: "Z-A" },
+  ];
 
   const onInputChange = (e) => {
     setInputValue(e.target.value);
@@ -112,15 +123,8 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="appTitle">Petar Todo</h1>
-      <div
-        style={{
-          display: "flex",
-          width: "50%",
-          margin: "0 auto",
-          justifyContent: "space-between",
-        }}
-      >
-        <div style={{ width: "50%" }}>
+      <div className="formAndSelectContainer">
+        <div className="todoFormContainer">
           <TodoForm
             inputRef={inputRef}
             inputValue={inputValue}
@@ -132,41 +136,24 @@ const App = () => {
           />
         </div>
 
-        <div style={{ width: "22%" }}>
-          <select
+        <div className="selectContainer">
+          <SelectInput
             onChange={onSelectChange}
             id="filterTodos"
-            style={{
-              height: "43px",
-              border: "2px solid gray",
-              borderRadius: "12px",
-              width: "100%",
-              cursor: "pointer",
-            }}
-          >
-            <option defaultValue>All Todos</option>
-            <option value="Active">Active</option>
-            <option value="Completed">Completed</option>
-          </select>
+            defaultValue="All Todos"
+            defaultName="All Todos"
+            options={filterOptions}
+          />
         </div>
 
-        <div style={{ width: "22%" }}>
-          <select
+        <div className="selectContainer">
+          <SelectInput
             onChange={onDateSort}
             id="sortTodos"
-            style={{
-              height: "43px",
-              border: "2px solid gray",
-              borderRadius: "12px",
-              width: "100%",
-              cursor: "pointer",
-            }}
-          >
-            <option defaultValue="desc">Latest</option>
-            <option value="asc">Earliest</option>
-            <option value="A-Z">A-Z</option>
-            <option value="Z-A">Z-A</option>
-          </select>
+            defaultValue="desc"
+            defaultName="Latest"
+            options={sortOptions}
+          />
         </div>
       </div>
 

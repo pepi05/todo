@@ -1,0 +1,13 @@
+.select {
+  height: 43px;
+  border: 2px solid gray;
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+  background-color: rgb(240, 240, 240);
+}
+
+.select:focus {
+  outline: none;
+  border-color: rgb(11, 59, 110);
+}
