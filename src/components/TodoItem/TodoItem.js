@@ -8,9 +8,9 @@ const TodoItem = ({ todo, onEditClick, completeTodo, deleteTodo }) => {
       key={todo.id}
       className={`${!todo.active && "todoCompletedContainer"} todoContainer`}
     >
-      <h2 className={`${!todo.active && "completedTodo"} todoName`}>
+      <h3 className={`${!todo.active && "completedTodo"} todoName`}>
         {todo.name}
-      </h2>
+      </h3>
       <div className="todoIconsContainer">
         <AiOutlineEdit
           onClick={() => onEditClick(todo.name, todo.id)}
