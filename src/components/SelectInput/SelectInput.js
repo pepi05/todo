@@ -1,9 +1,9 @@
 import React from "react";
 import "./selectInput.css";
 
-const SelectInput = ({ onChange, id, defaultValue, defaultName, options }) => {
+const SelectInput = ({ defaultValue, defaultName, options, onChange }) => {
   return (
-    <select onChange={onChange} id={id} className="select">
+    <select onChange={onChange} className="select">
       <option defaultValue={defaultValue}>{defaultName}</option>
       {options.map((option) => {
         return (
