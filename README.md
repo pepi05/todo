@@ -1,3 +1,6 @@
+# The app is hosted on Netlify, and it can be accessed at https://petar-todo.netlify.app/
+
+
 # Todo Application
 
 A simple and intuitive Todo application that lets you create, manage, and organize your tasks.
